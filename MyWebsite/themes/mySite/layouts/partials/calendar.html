@@ -1,0 +1,177 @@
+<!--
+    Hugo Calendar widget:
+    © www.github.com/eoc.online/hugo-calendar-widget
+    'Insights' refer to 'blogs' or 'posts' in this context.
+  -->
+{{ $context := .context }}
+{{ $fromYear := int .fromYear }}
+{{ $fromMonth := int .fromMonth }}
+{{ $toYear := int .toYear }}
+{{ $toMonth := int .toMonth }}
+{{ $pages := .pages }}
+
+{{ $context.Scratch.Set "currentYear" $fromYear }}
+{{ $context.Scratch.Add "consideredYears" (slice $fromYear) }}
+
+{{ range ($pages.GroupByPublishDate "2006") }}
+  {{ $context.Scratch.SetInMap "ArticlesPerYear" .Key ((len .Pages)) }}
+{{ end }}
+
+{{ range ($pages.GroupByPublishDate "2006-01") }}
+  {{ $context.Scratch.SetInMap "ArticlesPerMonth" .Key (len .Pages) }}
+{{ end }}
+
+{{ range ($pages.GroupByPublishDate "2006-01-02") }}
+  {{ $context.Scratch.SetInMap "ArticlesPerDay" .Key (len .Pages) }}
+{{ end }}
+
+{{ range $i, $sequence := (seq ((sub $toYear $fromYear))) }}
+  {{ $currentYear := $context.Scratch.Get "currentYear" }}
+  {{ $nextYear := (add $fromYear $sequence) }}
+
+  {{ if le $nextYear $toYear }}
+    {{ $context.Scratch.Add "consideredYears" ($nextYear) }}
+    {{ $context.Scratch.Set "currentYear" $nextYear }}
+  {{ end }}
+
+{{ end }}
+
+
+<div class="mb-4 hugo-calendar-widget">
+  <h6>Insights by Year & Month</h6>
+  <!-- p>From: {{ $fromYear }}-{{ $fromMonth }} To: {{ $toYear }}-{{ $toMonth }}</p -->
+
+  {{ $view1_text := "Years, no months" }}
+  {{ $view1_title := "Just Years with insights, no months" }}
+  {{ $view2_text := "Years + months" }}
+  {{ $view2_title := "Just Years with insights, just months with insights" }}
+  {{ $view3_text := "Years + months + calendars" }}
+  {{ $view3_title := "Just Years with insights, just months with insights, plus calendars" }}
+  {{ $view4_text := "All" }}
+  {{ $view4_title := "All Years, display months and calendars" }}
+  {{ $view5_text := "Hide" }}
+  {{ $view5_title := "Hide entire Calendar widget" }}
+
+
+  <div class="block mb-2 text-right">
+    <label for="viewSelect" class="text-sm font-semibold leading-6 text-gray-900">View: &nbsp;</label>
+    <select id="viewSelect" name="viewSelect" class="py-0 pl-2 pr-10 mt-2 text-gray-900 border-0 rounded-md ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-200 sm:text-sm sm:leading-6" oninput="changeView()">
+      <option selected title="{{ $view1_title }}">{{ $view1_text }}</option>
+      <option title="{{ $view2_title }}">{{ $view2_text }}</option>
+      <option title="{{ $view3_title }}">{{ $view3_text }}</option>
+      <option title="{{ $view4_title }}">{{ $view4_text }}</option>
+      <option title="{{ $view5_title }}">{{ $view5_text }}</option>
+    </select>
+  </div>
+
+  {{ range ($context.Scratch.Get "consideredYears") }}
+    {{ partialCached "calendar/year" (dict "context" $context "year" . "fromYear" $fromYear "fromMonth" $fromMonth "toYear" $toYear
+      "toMonth" $toMonth) (string (delimit (slice $fromYear $fromMonth $toYear $toMonth .) ""))
+    }}
+  {{ end }}
+
+</div>
+<!--
+
+
+
+ ---------------------------------->
+<script>
+  // run initially: Add event listeners to all years (the entire year block)
+  document.querySelectorAll(".year-has-articles").forEach(year => year.addEventListener("click", toggleMonth));
+  document.querySelectorAll(".year-no-articles").forEach(year => year.addEventListener("click", toggleMonth));
+
+  // toggle display this year's months (& toggle close-folder/open-folder icons)
+  function toggleMonth() {
+    let year = this;
+    year.querySelectorAll(".month-has-articles").forEach(month => month.classList.toggle("hidden"));
+
+    // Only for "all" view: display months without articles
+    if (document.getElementById("viewSelect").options[viewSelect.selectedIndex].text == "{{ $view4_text }}") {
+      year.querySelectorAll(".month-no-articles").forEach(month => month.classList.toggle("hidden"));
+    }
+
+    let closed = year.querySelectorAll(".close-folder");
+    let opened = year.querySelectorAll(".open-folder");
+
+    closed.forEach(year => {year.classList.add("open-folder"); year.classList.remove("close-folder")});
+    opened.forEach(year => {year.classList.add("close-folder"); year.classList.remove("open-folder")});
+  }
+
+
+  function changeView() {
+    let viewSelect = document.getElementById("viewSelect");
+    switch(viewSelect.options[viewSelect.selectedIndex].text) {
+      case "{{ $view1_text }}":
+        displayYears();
+        break;
+      case "{{ $view2_text }}":
+        displayMonths();
+        break;
+      case "{{ $view3_text }}":
+        displayCalendars()
+        break;
+      case "{{ $view4_text }}":
+        displayEverything();
+        break;
+      case "{{ $view5_text }}":
+        hideEntireCalendar();
+        break;
+      default:
+        console.warn("Unknown view: " + viewSelect.options[viewSelect.selectedIndex].text);
+    }
+  }
+
+  // Just Years with insights, no months
+  function displayYears() {
+    document.querySelectorAll(".year-has-articles").forEach(year => year.classList.remove("hidden"));
+    document.querySelectorAll(".month-has-articles").forEach(month => month.classList.add("hidden"));
+    document.querySelectorAll(".year-no-articles").forEach(year => year.classList.add("hidden"));
+    document.querySelectorAll(".month-no-articles").forEach(month => month.classList.add("hidden"));
+    document.querySelectorAll(".calendar-month-calendar").forEach(month => month.classList.add("hidden"));
+    // close all folders...
+    document.querySelectorAll(".open-folder").forEach(year => {year.classList.add("close-folder"); year.classList.remove("open-folder");});
+  }
+
+  // Months: Just display Years with insights, plus months with insights
+  function displayMonths() {
+    document.querySelectorAll(".year-has-articles").forEach(year => year.classList.remove("hidden"));
+    document.querySelectorAll(".month-has-articles").forEach(month => month.classList.remove("hidden"));
+    document.querySelectorAll(".year-no-articles").forEach(year => year.classList.add("hidden"));
+    document.querySelectorAll(".month-no-articles").forEach(month => month.classList.add("hidden"));
+    document.querySelectorAll(".calendar-month-calendar").forEach(month => month.classList.add("hidden"));
+    // open all folders
+    document.querySelectorAll(".close-folder").forEach(year => {year.classList.add("open-folder"); year.classList.remove("close-folder");});
+  }
+
+  // Months: Just display Years with insights, plus months & calendars with insights
+  function displayCalendars() {
+    document.querySelectorAll(".year-has-articles").forEach(year => year.classList.remove("hidden"));
+    document.querySelectorAll(".month-has-articles").forEach(month => month.classList.remove("hidden"));
+    document.querySelectorAll(".year-no-articles").forEach(year => year.classList.add("hidden"));
+    document.querySelectorAll(".month-no-articles").forEach(month => month.classList.add("hidden"));
+    document.querySelectorAll(".calendar-month-calendar").forEach(month => month.classList.remove("hidden"));
+    // open all folders
+    document.querySelectorAll(".close-folder").forEach(year => {year.classList.add("open-folder"); year.classList.remove("close-folder");});
+  }
+
+  // All Years, display months and calendars, even without insights
+  function displayEverything() {
+    document.querySelectorAll(".year-has-articles").forEach(year => year.classList.remove("hidden"));
+    document.querySelectorAll(".month-has-articles").forEach(month => month.classList.remove("hidden"));
+    document.querySelectorAll(".year-no-articles").forEach(year => year.classList.remove("hidden"));
+    document.querySelectorAll(".month-no-articles").forEach(month => month.classList.remove("hidden"));
+    document.querySelectorAll(".calendar-month-calendar").forEach(month => month.classList.remove("hidden"));
+    // open all folders
+    document.querySelectorAll(".close-folder").forEach(year => {year.classList.add("open-folder"); year.classList.remove("close-folder");});
+  }
+
+  // Hide entire widget (i.e., all years)
+  function hideEntireCalendar() {
+    document.querySelectorAll(".year-has-articles").forEach(year => year.classList.add("hidden"));
+    document.querySelectorAll(".month-has-articles").forEach(month => month.classList.add("hidden"));
+    document.querySelectorAll(".year-no-articles").forEach(year => year.classList.add("hidden"));
+    document.querySelectorAll(".month-no-articles").forEach(month => month.classList.add("hidden"));
+    document.querySelectorAll(".calendar-month-calendar").forEach(month => month.classList.add("hidden"));
+  }
+</script>

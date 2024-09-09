@@ -1,0 +1,39 @@
+<!-- Purpose: This partial is used to render a single day in the calendar. It is used in the calendar.html layout. -->
+
+{{ $context := .context }}
+{{ $year := .year }}
+
+{{ $day := .day }}
+{{ $dayTwoLetters := printf "%02d" $day }}
+{{ $pageMap := .pagemap }}
+
+{{ $month := .month }}
+{{ $monthTwoLetters := printf "%02d" $month }}
+
+{{ $dateString := (string (delimit (slice $year $monthTwoLetters $dayTwoLetters) "-")) }}
+{{ $dateString2 := printf "%04d-%02d-%02d" $year $month $day }}
+
+{{ $dateString3 := printf "%04d-%02d-%02d" $year $month 1 }}
+{{ $temp := replace $dateString2 "[" "" }}
+{{ $dateString3 := replace $temp "]" "" }}
+
+{{ $context.Scratch.Set "isFuture" false }}
+{{ if le now (time $dateString3) }}
+  {{ $context.Scratch.Set "isFuture" true }}
+{{ end }}
+{{ $isFuture := $context.Scratch.Get "isFuture" }}
+{{ $isFuture := false }}
+
+{{- $articlesFound := index ($context.Scratch.Get "ArticlesPerDay") $dateString3 -}}
+<li class="calendar-day
+  {{ if $isFuture }}calendar-day-future{{ end }}
+  {{ if gt $articlesFound 0 }}calendar-day-has-articles{{ end }}
+  {{ if eq (now.Format "2006-01-02") $dateString3 }}calendar-day-is-today{{ end }}
+   ">
+  {{ if gt $articlesFound 0 }}
+  <a href="/archive/{{ delimit (slice $year $month $day) "-" }}/"
+    title="{{ $dateString3 }} has {{ $articlesFound }} article{{ if gt $articlesFound 1 }}s{{ end }}">
+    {{- end -}}
+    <time datetime="{{ $dateString }}">{{ $day }}<em>{{ $articlesFound }}</em></time>
+    {{- if gt $articlesFound 0 -}}</a>{{- end -}}
+</li>

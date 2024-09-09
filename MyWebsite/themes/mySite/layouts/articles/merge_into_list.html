@@ -1,0 +1,11 @@
+<!-- sidebar -->
+<!--
+    Hugo Calendar widget:
+    ©www.github.com/eoc.online/hugo-calendar-widget
+    'Insights' refer to 'blogs' or 'posts' in this context.
+  -->
+{{ $fromYear := (index .Pages.ByPublishDate 0).Date.Format "2006" }}
+{{ $fromMonth := (index .Pages.ByPublishDate 0).Date.Format "1" }}
+{{ partialCached "calendar" (dict "context" . "fromYear" $fromYear "fromMonth" $fromMonth "toYear" (now.Format "2006") "toMonth" (now.Format "1") "pages" .Site.Pages) }}
+
+<!-- widget wrapper -->
