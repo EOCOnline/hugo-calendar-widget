@@ -33,7 +33,7 @@ top level page, "Archive", with sub-pages as determined by the Archive front
 matter in your pages: see below under "Archive Taxonomy" for details on how to
 make this happen.
 
-<img title="" src="./assets/images/calendar_readme/archive_folders.png" alt="Hugo Archive Screenshot" width="150">
+<img title="" src="./images/archive_folders.png" alt="Hugo Archive Screenshot" width="150">
 
 ### Calendar Widget
 
@@ -46,7 +46,7 @@ dropdown menu as shown below. On hover, tooltips provide a bit more explanation.
 - All views are responsive: they shrink & grow depending on media & browser
   screen size.
 
-<img title="changing views" src="./assets/images/calendar_readme/changing_views.png" alt="changing views" width="400">
+<img title="changing views" src="./images/changing_views.png" alt="changing views" width="400">
 
 The following describes each view in more detail, detailing some of the user
 interaction and features for each view.
@@ -55,7 +55,7 @@ interaction and features for each view.
 
 > "Just Years with insights, no months"
 
-<img title="default_view" src="./assets/images/calendar_readme/default_view.png" alt="default_view" width="400">
+<img title="default_view" src="./images/default_view.png" alt="default_view" width="400">
 
 The initial (default) view is shown above.
 
@@ -65,9 +65,9 @@ The initial (default) view is shown above.
 
 - Years with no posts are hidden by default.
 
-<img title="month_hover" src="./assets/images/calendar_readme/month_hover.png" alt="month_hover" width="400">
+<img title="month_hover" src="./images/month_hover.png" alt="month_hover" width="400">
 
-<img title="month_archive_link" src="./assets/images/calendar_readme/month_archive_link.png" alt="month_archive_link" width="150">
+<img title="month_archive_link" src="./images/month_archive_link.png" alt="month_archive_link" width="150">
 
 - As shown above, users can click on the folder icon (the light blue area on
   hover) to open the year's folder, thus showing months.
@@ -78,15 +78,15 @@ The initial (default) view is shown above.
 - Multiple folders can be independently opened and closed as desired.
 
 - A 'quirk' of the current code, that I've left as a 'bonus feature', is that on
-  initial selection, opened years also show mini-calendar months. This doesn't happen
-  once the 'Years + Months' view is chosen, but only for the 'Years + Months +
-  Calendar' or 'All' views.
+  initial selection, opened years also show mini-calendar months. This doesn't
+  happen once the 'Years + Months' view is chosen, but only for the 'Years +
+  Months + Calendar' or 'All' views.
 
 ### View 2: Years + Months
 
 > "Just Years with insights, just months with insights"
 
-<img title="years+months" src="./assets/images/calendar_readme/years+months.png" alt="years+months" width="400">
+<img title="years+months" src="./images/years+months.png" alt="years+months" width="400">
 
 Selecting "Year + Months" in the View dropdown opens all years that have any
 blogs, displaying the months that have blogs.
@@ -107,18 +107,18 @@ blogs, displaying the months that have blogs.
 
 > "Just Years with insights, just months with insights, plus calendars"
 
-<img title="years+months+calendars" src="./assets/images/calendar_readme/years+months+calendars.png" alt="years+months+calendars" width="400">
+<img title="years+months+calendars" src="./images/years+months+calendars.png" alt="years+months+calendars" width="400">
 
 **Notes:**
 
-- The addition of the mini-calendar months provides a visual display of those months
-  with blogs.
+- The addition of the mini-calendar months provides a visual display of those
+  months with blogs.
 
 - Hovering on a day with blog posts displays the number of posts for the day.
 
-  <img title="day_hover" src="./assets/images/calendar_readme/day_hover.png" alt="day_hover" width="400">
+  <img title="day_hover" src="./images/day_hover.png" alt="day_hover" width="400">
 
-  <img title="day_hover_link" src="./assets/images/calendar_readme/day_hover_link.png" alt="day_hover_link" width="181">
+  <img title="day_hover_link" src="./images/day_hover_link.png" alt="day_hover_link" width="181">
 
 - Clicking on a day with blog posts navigates to the archive page with previews
   of that day's posts.
@@ -130,7 +130,7 @@ blogs, displaying the months that have blogs.
 
 > "All Years, display months and calendars"
 
-<img src="./assets/images/calendar_readme/all_view.png" title="all_view" alt="all_view" width="400">
+<img src="./images/all_view.png" title="all_view" alt="all_view" width="400">
 
 Only this view shows ALL years and ALL months - i.e., even those with _zero_
 blog posts or articles. (This was the only option in the original widget I
@@ -143,7 +143,7 @@ started with.)
 
 > "Hide entire Calendar widget"
 
-<img src="./assets/images/calendar_readme/hidden.png" title="hidden" alt="hidden" width="400">
+<img src="./images/hidden.png" title="hidden" alt="hidden" width="400">
 
 This just hides the widget body, say if the user wants to maximize screen real
 estate for other purposes. The widget heading remains visible.
@@ -156,7 +156,7 @@ The directory structure at
 [www.github.com/eoconline/hugo-calendar-widget](www.github.com/eoconline/hugo-calendar-widget)
 should basically match your existing Hugo site.
 
-<img src="./assets/images/calendar_readme/calendar_widget_files.png" title="Files inserted for the Hugo Calendar Widget" alt="Files inserted for the Hugo Calendar Widget" width="400">
+<img src="./images/calendar_widget_files.png" title="Files inserted for the Hugo Calendar Widget" alt="Files inserted for the Hugo Calendar Widget" width="400">
 
 1. If so, rename the 'themes/mySite' directory (above) to match your website
    name and then drop our files into your existing website - <u>no files should
@@ -165,13 +165,17 @@ should basically match your existing Hugo site.
 2. Edit your existing` /assets/scss/custom.scss` file & add the following line:
    `@import "./calendar.scss";`
 
-3. If you are not already using [Tailwind CSS](<[https://tailwindcss.com/](https://tailwindcss.com/)>) to style your website, you will need to enable it as shown at [Tailwind CSS installation](https://tailwindcss.com/docs/installation).
+3. If you are not already using
+   [Tailwind CSS](<[https://tailwindcss.com/](https://tailwindcss.com/)>) to
+   style your website, you will need to enable it as shown at
+   [Tailwind CSS installation](https://tailwindcss.com/docs/installation).
 
 4. I'm unclear how to ensure availability of the two free "Font Awesome 6 Free"
    icons referenced by the above scss file: open-folder & closed-folder. You may
    need to `npm install fontawesome`
 
-   or maybe add another line to your `/assets/scss/custom.scss` file, i.e.: `@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css";`
+   or maybe add another line to your `/assets/scss/custom.scss` file, i.e.:
+   `@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css";`
 
 5. Edit the page where you would like the calendar widget to appear. (I changed
    my `\themes\mySite\layouts\articles\list.html` file.) Add the following code.
@@ -195,10 +199,13 @@ should basically match your existing Hugo site.
 ### Installation: Archive Taxonomy
 
 To create the Archive, we use the native
-[Hugo taxonomy](https://gohugo.io/methods/site/taxonomies/) ([also this](https://gohugo.io/content-management/taxonomies/)) facility. It auto-generates Archive pages.
+[Hugo taxonomy](https://gohugo.io/methods/site/taxonomies/)
+([also this](https://gohugo.io/content-management/taxonomies/)) facility. It
+auto-generates Archive pages.
 
 1. Edit the existing `hugo.toml` file at the root of your web site, creating the
-   archive as a taxonomy by inserting a line with the singular & plural form of the new taxonomy term under the `[taxonomy]` group:
+   archive as a taxonomy by inserting a line with the singular & plural form of
+   the new taxonomy term under the `[taxonomy]` group:
 
 #### hugo.toml
 
@@ -208,10 +215,10 @@ To create the Archive, we use the native
     archive = 'archive' # for Calendar widget (see \calendar_readme.md)
 ```
 
-N.B., typical form for taxonomies in the `hugo.toml` file is <SINGULAR_NAME> = <PLURAL_NAME>,
-but I want the site's final directory name to be 'Archive', not 'Archives',
-so strayed here from tradition. Just match whatever 'plural' term you use in the front matter
-as shown next.
+N.B., typical form for taxonomies in the `hugo.toml` file is <SINGULAR_NAME> =
+<PLURAL_NAME>, but I want the site's final directory name to be 'Archive', not
+'Archives', so strayed here from tradition. Just match whatever 'plural' term
+you use in the front matter as shown next.
 
 Next, edit all the pages you desire rendered by the calendar widget. (I edited
 those in my `\content\english\articles` directory.) Add the following front
@@ -235,7 +242,9 @@ month of March and within the specific day’s archive at the 6th of March, 2024
 
 ## Programmable Modifications
 
-Feel free to modify current functionality if you are comfortable programming. Hugo is well documented, but uses the Go language internally if you need to delve into that.
+Feel free to modify current functionality if you are comfortable programming.
+Hugo is well documented, but uses the Go language internally if you need to
+delve into that.
 
 The following provides some guidance.
 
@@ -243,31 +252,45 @@ The following provides some guidance.
 
 ### list.html
 
-As mentioned above in the first installation section, you need to put a call to the calendar widget where you want it to appear, perhaps above or below other partials components like Categories or Tags?
+As mentioned above in the first installation section, you need to put a call to
+the calendar widget where you want it to appear, perhaps above or below other
+partials components like Categories or Tags?
 
-These few lines use `.Pages.ByPublishDate` to derive a default starting year and month for the calendar widget - the oldest post in the `.Pages` collection, but easily changed to serve your needs.
+These few lines use `.Pages.ByPublishDate` to derive a default starting year and
+month for the calendar widget - the oldest post in the `.Pages` collection, but
+easily changed to serve your needs.
 
 ### calendar.html
 
-That call to the calendar widget is handles by the main partial file, `/layouts/partial/calendar.html`.
+That call to the calendar widget is handles by the main partial file,
+`/layouts/partial/calendar.html`.
 
-Go commands are handled during the compile phase. New for this edition is a small section of Javascript that adds a View dropdown as exhaustively demonstrated above. Modifying the view results in calls to handler routines that change various class modes from `hidden` to the default, display.
+Go commands are handled during the compile phase. New for this edition is a
+small section of Javascript that adds a View dropdown as exhaustively
+demonstrated above. Modifying the view results in calls to handler routines that
+change various class modes from `hidden` to the default, display.
 
-The widget parameters the calendar partial receives are provided using a `map` using `dict` (_'dict'ionaries provide key-value-maps like `dict key1 value1 key2 value2 ...`_).
+The widget parameters the calendar partial receives are provided using a `map`
+using `dict` (_'dict'ionaries provide key-value-maps like
+`dict key1 value1 key2 value2 ...`_).
 
-Context-based functions obviously need access to the larger context and data, and thats the first parameter.
+Context-based functions obviously need access to the larger context and data,
+and thats the first parameter.
 
 ### year.html
 
-Calendar.html then repeatedly calls the `year.html` partial to render a single year. (Sub-partials are organized into sub-folder `layouts/partials/calendar/`.)
+Calendar.html then repeatedly calls the `year.html` partial to render a single
+year. (Sub-partials are organized into sub-folder `layouts/partials/calendar/`.)
 
 ### month.html
 
-The year partial then repeatedly calls `months.html` to render just the name of the months to be rendered.
+The year partial then repeatedly calls `months.html` to render just the name of
+the months to be rendered.
 
 ### day.html
 
-The month partial in turn calls `day.html` to render the mini-calndar month figures.
+The month partial in turn calls `day.html` to render the mini-calndar month
+figures.
 
 ### Widget Parameters
 
@@ -285,33 +308,41 @@ don't have access to the parent context.
 
 This defaults to the oldest article/blog.
 
-Alter it to define a different beginning year range for the calendar. Use a four digit format: **YYYY**.
+Alter it to define a different beginning year range for the calendar. Use a four
+digit format: **YYYY**.
 
 #### fromMonth
 
-This defaults to the first blog/article's month. _If hardcoding something else, do <u>not</u> use a leading zero!_
+This defaults to the first blog/article's month. _If hardcoding something else,
+do <u>not</u> use a leading zero!_
 
 #### toYear
 
 This defaults to the current year.
 
-Alter it if you wish to reduce the years shown by the calendar. Use a four digit format: **YYYY**.
+Alter it if you wish to reduce the years shown by the calendar. Use a four digit
+format: **YYYY**.
 
 #### toMonth
 
 This defaults to the current month.
 
-Alter it if you wish to reduce the calendar range. \__If hardcoding something else, do <u>not</u> use a leading zero!_
+Alter it if you wish to reduce the calendar range. \__If hardcoding something
+else, do <u>not</u> use a leading zero!_
 
 #### pages
 
 Pages refers to a Hugo collection of pages/articles/blogs/posts/insights to
-extract dates for the calendar from. This provides great flexibility to display calendars for other collections!
+extract dates for the calendar from. This provides great flexibility to display
+calendars for other collections!
 
 ### Styling
 
-The original project just used an expanded `assets/scss/calendar.scss` file. The `calendar.html`, `year.html` and `month.html` files now incorporate [Tailwind
-CSS](https://tailwindcss.com/) to eliminate run-time processing. The mini-calendar months (i.e., the `day.html` file) still rely on the current `assets/scss/calendar.scss` file.
+The original project just used an expanded `assets/scss/calendar.scss` file. The
+`calendar.html`, `year.html` and `month.html` files now incorporate
+[Tailwind CSS](https://tailwindcss.com/) to eliminate run-time processing. The
+mini-calendar months (i.e., the `day.html` file) still rely on the current
+`assets/scss/calendar.scss` file.
 
 ---
 
