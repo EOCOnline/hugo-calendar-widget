@@ -368,5 +368,7 @@ and issues as you find & resolve issues for problems or additional
 functionality. Those are accepted at
 [https://github.com/eoconline/hugo-calendar-widget](https://github.com/eoconline/hugo-calendar-widget).
 
-Let me know if you appreciate & use this widget! Send a note to HugoCalendar
-(at) eoc.online
+Let me know if you appreciate & use this widget! 
+- Star the repo above
+- I am always looking for new ideas and feedback: Send a note to HugoCalendar (at) eoc.online
+- If you find this useful, buy me some coffee: [donate via Paypal](https://www.paypal.me/vashjuan).
