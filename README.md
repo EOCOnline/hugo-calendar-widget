@@ -2,6 +2,7 @@
 
 ## Introduction
 
+<img src="./images/hugo-calendar-widget_in-action.398x480.png" alt="hugo-calendar-widget in Action.png" title="hugo-calendar-widget in Action" width="398" height="480" style="float:right"/>
 Full-featured content management systems like DNN (or Drupal) often provide
 calendar components or widgets that show date of blogs/posts/insights. Inserted
 into pages on the website, users can see when blog posts were published. Often
