@@ -1,46 +1,44 @@
 <!-- For details visit: ©www.github.com/eoc.online/hugo-calendar-widget
   Purpose: Display month titles from 1 year -->
 
-{{ $months := seq 12 }}
-{{ $context := .context }}
-{{ $year := .year }}
-{{ $fromYear := .fromYear }}
-{{ $fromMonth := .fromMonth }}
-{{ $toYear := .toYear }}
-{{ $toMonth := .toMonth }}
-
-{{ $yearStr := printf "%04d" $year }}
-{{ $yearInt := cast.ToInt $yearStr }}
-
-{{ $isLeapYear := false }}
-{{ if eq (mod $yearInt 4) 0 }}
-  {{ if or (ne (mod $yearInt 100) 0) (eq (mod $yearInt 400) 0) }}
-    {{ $isLeapYear = true }} <!-- e.g., 2016, 2020, 2024 -->
-  {{ end }}
-{{ end }}
-
-{{ $articlesThisYear := index ($context.Scratch.Get "ArticlesPerYear") ( $yearStr ) }}
+{{ $months := seq 12 }} {{ $context := .context }} {{ $year := .year }} {{
+$fromYear := .fromYear }} {{ $fromMonth := .fromMonth }} {{ $toYear := .toYear
+}} {{ $toMonth := .toMonth }} {{ $yearStr := printf "%04d" $year }} {{ $yearInt
+:= cast.ToInt $yearStr }} {{ $isLeapYear := false }} {{ if eq (mod $yearInt 4) 0
+}} {{ if or (ne (mod $yearInt 100) 0) (eq (mod $yearInt 400) 0) }} {{
+$isLeapYear = true }}
+<!-- e.g., 2016, 2020, 2024 -->
+{{ end }} {{ end }} {{ $articlesThisYear := index ($context.Scratch.Get
+"ArticlesPerYear") ( $yearStr ) }}
 
 <span class="flex">
-{{ if gt $articlesThisYear 0 }}
+  {{ if gt $articlesThisYear 0 }}
   <span class="w-full p-2 mb-1 bg-[#F6F6F6] rounded-md year-has-articles">
-{{ else }}
-  <span class="hidden w-full p-2 mb-1 rounded-md bg-[#F6F6F6] year-no-articles">
-  {{ $articlesThisYear = 0 }}
-{{ end }}
+    {{ else }}
+    <span
+      class="hidden w-full p-2 mb-1 rounded-md bg-[#F6F6F6] year-no-articles"
+    >
+      {{ $articlesThisYear = 0 }} {{ end }}
 
-    <button aria-label="toggle year" class="flex rounded-md close-folder hover:bg-sky-200">
-      &nbsp;<a href="/archive/{{ $year }}/"><h5 class="hover:bg-sky-400">{{ $yearStr }}</h5></a>
-      <span class="pt-1 text-sm">&nbsp;({{ $articlesThisYear }})</span>
-    </button>
+      <button
+        aria-label="toggle year"
+        class="flex rounded-md close-folder hover:bg-sky-200"
+      >
+        &nbsp;
+        <a href="/archive/{{ $year }}/">
+          <h5 class="hover:bg-sky-400 dark:text-slate-600">{{ $yearStr }}</h5>
+        </a>
 
-    <span class="flex flex-row flex-wrap content-start flex-initial px-1">
-      {{ range $months }}
-        {{ if or (and (ne $year $fromYear) (ne $year $toYear)) (and (eq $year $fromYear) (ge . $fromMonth)) (and (eq $year $toYear) (le . $toMonth)) }}
-          {{ partialCached "calendar/month" (dict "context" $context "year" $year "isLeapYear" $isLeapYear "month" .) (string  (delimit (slice $year .) "")) }}
-        {{ end }}
-      {{ end }}
+        <span class="pt-1 text-sm">&nbsp;({{ $articlesThisYear }})</span>
+      </button>
+
+      <span class="flex flex-row flex-wrap content-start flex-initial px-1">
+        {{ range $months }} {{ if or (and (ne $year $fromYear) (ne $year
+        $toYear)) (and (eq $year $fromYear) (ge . $fromMonth)) (and (eq $year
+        $toYear) (le . $toMonth)) }} {{ partialCached "calendar/month" (dict
+        "context" $context "year" $year "isLeapYear" $isLeapYear "month" .)
+        (string (delimit (slice $year .) "")) }} {{ end }} {{ end }}
+      </span>
     </span>
-
   </span>
 </span>
