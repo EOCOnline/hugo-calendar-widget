@@ -23,9 +23,9 @@
 
 <span class="flex">
 {{ if gt $articlesThisYear 0 }}
-  <span class="w-full p-2 mb-1 bg-[#F6F6F6] dark:bg-zinc-600 rounded-md year-has-articles">
+  <span class="w-full p-2 mb-1 bg-[#F6F6F6] dark:bg-zinc-800 rounded-md year-has-articles">
 {{ else }}
-  <span class="hidden w-full p-2 mb-1 rounded-md bg-[#F6F6F6]  dark:bg-zinc-600 year-no-articles">
+  <span class="hidden w-full p-2 mb-1 rounded-md bg-[#F6F6F6]  dark:bg-zinc-800 year-no-articles">
   {{ $articlesThisYear = 0 }}
 {{ end }}
 
